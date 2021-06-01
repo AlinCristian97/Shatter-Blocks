@@ -7,6 +7,7 @@ public class Ball : MonoBehaviour
 {
     // Components
     private Rigidbody2D _rigidbody;
+    private AudioSource _audioSource;
     
     // Config parameters
     [SerializeField] private Paddle _paddle;
@@ -20,6 +21,7 @@ public class Ball : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -53,5 +55,13 @@ public class Ball : MonoBehaviour
 
         var paddlePos = new Vector2(paddleTransform.position.x, paddleTransform.position.y);
         transform.position = paddlePos + _paddleToBallVector;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (_hasStarted)
+        {
+            _audioSource.Play();
+        }
     }
 }
