@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Level : MonoBehaviour
 {
-    [SerializeField] private int _breakableBlocks;
+    [SerializeField] private int _breakableBlocks; //debug
     private SceneLoader _sceneLoader;
 
     private void Awake()
