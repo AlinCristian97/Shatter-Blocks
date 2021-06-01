@@ -10,9 +10,12 @@ public class Ball : MonoBehaviour
     
     // Config parameters
     [SerializeField] private Paddle _paddle;
+    [SerializeField] private float _xLaunch = 2f;
+    [SerializeField] private float _yLaunch = 15f;
 
     // State parameters
     private Vector2 _paddleToBallVector;
+    private bool _hasStarted;
 
     private void Awake()
     {
@@ -27,8 +30,27 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
+        if (!_hasStarted)
+        {
+            LockBallToPaddle();
+            LaunchOnMouseClick();
+        }
+    }
+
+    private void LaunchOnMouseClick()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            _rigidbody.simulated = true; // TODO: Find a better solution for fixing the bug
+            _hasStarted = true;
+            _rigidbody.velocity = new Vector2(_xLaunch, _yLaunch);
+        }
+    }
+
+    private void LockBallToPaddle()
+    {
         Transform paddleTransform = _paddle.transform;
-        
+
         var paddlePos = new Vector2(paddleTransform.position.x, paddleTransform.position.y);
         transform.position = paddlePos + _paddleToBallVector;
     }

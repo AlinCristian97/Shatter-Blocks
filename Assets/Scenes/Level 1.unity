@@ -537,6 +537,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _paddle: {fileID: 1907446859}
+  _xLaunch: 2
+  _yLaunch: 15
 --- !u!1 &1093430943
 GameObject:
   m_ObjectHideFlags: 0
