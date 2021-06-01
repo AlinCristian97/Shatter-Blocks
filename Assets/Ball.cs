@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Ball : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Ball : MonoBehaviour
     [SerializeField] private Paddle _paddle;
     [SerializeField] private float _xLaunch = 2f;
     [SerializeField] private float _yLaunch = 15f;
+    [SerializeField] private AudioClip[] _ballSounds;
 
     // State parameters
     private Vector2 _paddleToBallVector;
@@ -61,7 +63,10 @@ public class Ball : MonoBehaviour
     {
         if (_hasStarted)
         {
-            _audioSource.Play();
+            int randomIndex = Random.Range(0, _ballSounds.Length);
+            AudioClip clip = _ballSounds[randomIndex];
+            
+            _audioSource.PlayOneShot(clip);
         }
     }
 }
