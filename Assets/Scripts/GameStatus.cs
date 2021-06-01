@@ -13,6 +13,20 @@ public class GameStatus : MonoBehaviour
     
     [SerializeField] private int _currentScore = 0; //debug
 
+    private void Awake()
+    {
+        int gameStatusCount = FindObjectsOfType<GameStatus>().Length;
+        if (gameStatusCount > 1)
+        {
+            gameObject.SetActive(false); //bugfix (score not updating after scene load)
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+
     private void Start()
     {
         _scoreText.text = _currentScore.ToString();
