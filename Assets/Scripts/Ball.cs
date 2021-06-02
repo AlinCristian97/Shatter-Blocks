@@ -15,6 +15,7 @@ public class Ball : MonoBehaviour
     [SerializeField] private float _xLaunch = 2f;
     [SerializeField] private float _yLaunch = 15f;
     [SerializeField] private AudioClip[] _ballSounds;
+    [SerializeField] private float _randomFactor = 1f;
 
     // State parameters
     private Vector2 _paddleToBallVector;
@@ -61,12 +62,17 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        float randomX = Random.Range(0f, _randomFactor);
+        float randomY = Random.Range(0f, _randomFactor);
+        Vector2 velocityTweak = new Vector2(randomX, randomY);
+        
         if (_hasStarted)
         {
             int randomIndex = Random.Range(0, _ballSounds.Length);
             AudioClip clip = _ballSounds[randomIndex];
             
             _audioSource.PlayOneShot(clip);
+            _rigidbody.velocity += velocityTweak;
         }
     }
 }
