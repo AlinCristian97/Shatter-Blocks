@@ -5,10 +5,13 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
+    private SpriteRenderer _spriteRenderer;
+    
     [SerializeField] private AudioClip _breakSound;
     [SerializeField] private GameObject _blockSparklesVFX;
     [SerializeField] private int _maxHits;
-
+    [SerializeField] private Sprite[] _hitSprites;
+    
     private Level _level;
     private GameSession _gameSession;
 
@@ -16,6 +19,8 @@ public class Block : MonoBehaviour
     
     private void Awake()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        
         _level = FindObjectOfType<Level>();
         _gameSession = FindObjectOfType<GameSession>();
     }
@@ -48,8 +53,19 @@ public class Block : MonoBehaviour
         {
             DestroyBlock();
         }
+        else
+        {
+            ShowNextHitSprite();
+        }
     }
-    
+
+    private void ShowNextHitSprite()
+    {
+        int spriteIndex = _timesHit - 1;
+        
+        _spriteRenderer.sprite = _hitSprites[spriteIndex];
+    }
+
     private void DestroyBlock()
     {
         _gameSession.AddToScore();
