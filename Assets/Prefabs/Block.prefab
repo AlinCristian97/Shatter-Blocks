@@ -123,3 +123,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _breakSound: {fileID: 8300000, guid: 46d63a14215603c4e8089cc452f11496, type: 3}
+  _blockSparklesVFX: {fileID: 100000, guid: 7d846c02296ef4dc4abff04ce3e5262c, type: 3}
