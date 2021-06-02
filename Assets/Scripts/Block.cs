@@ -7,10 +7,13 @@ public class Block : MonoBehaviour
 {
     [SerializeField] private AudioClip _breakSound;
     [SerializeField] private GameObject _blockSparklesVFX;
+    [SerializeField] private int _maxHits;
 
     private Level _level;
     private GameSession _gameSession;
 
+    [SerializeField] private int _timesHit; //Serialized for debug
+    
     private void Awake()
     {
         _level = FindObjectOfType<Level>();
@@ -34,10 +37,19 @@ public class Block : MonoBehaviour
     {
         if (CompareTag("Breakable"))
         {
-            DestroyBlock();
+            HandleHit();
         }
     }
 
+    private void HandleHit()
+    {
+        _timesHit++;
+        if (_timesHit >= _maxHits)
+        {
+            DestroyBlock();
+        }
+    }
+    
     private void DestroyBlock()
     {
         _gameSession.AddToScore();

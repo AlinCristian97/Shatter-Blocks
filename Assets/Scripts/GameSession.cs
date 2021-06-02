@@ -11,7 +11,7 @@ public class GameSession : MonoBehaviour
     [SerializeField] private int _pointsPerBlockDestroyed = 83;
     [SerializeField] private TextMeshProUGUI _scoreText;
     
-    [SerializeField] private int _currentScore = 0; //debug
+    [SerializeField] private int _currentScore = 0; //Serialized for debug
 
     private void Awake()
     {
