@@ -8,12 +8,12 @@ public class Block : MonoBehaviour
     [SerializeField] private AudioClip _breakSound;
 
     private Level _level;
-    private GameStatus _gameStatus;
+    private GameSession _gameSession;
 
     private void Awake()
     {
         _level = FindObjectOfType<Level>();
-        _gameStatus = FindObjectOfType<GameStatus>();
+        _gameSession = FindObjectOfType<GameSession>();
     }
 
     private void Start()
@@ -28,7 +28,7 @@ public class Block : MonoBehaviour
 
     private void DestroyBlock()
     {
-        _gameStatus.AddToScore();
+        _gameSession.AddToScore();
         
         AudioSource.PlayClipAtPoint(_breakSound, Camera.main.transform.position);
         Destroy(gameObject);
